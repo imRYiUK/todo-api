@@ -1,0 +1,57 @@
+@TodoApi_HostAddress = http://localhost:5013
+
+### Connexion admin
+POST {{TodoApi_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+	"username": "admin",
+	"password": "Admin123!"
+}
+
+### Connexion user
+POST {{TodoApi_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+	"username": "user",
+	"password": "User123!"
+}
+
+### Remplacez le token ci-dessous avec celui récupéré via /api/auth/login
+@token = REPLACE_WITH_JWT_TOKEN
+
+### Lire les todos (user ou admin)
+GET {{TodoApi_HostAddress}}/api/todos
+Authorization: Bearer {{token}}
+Accept: application/json
+
+###
+
+### Ajouter un todo (admin uniquement)
+POST {{TodoApi_HostAddress}}/api/todos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+	"name": "Terminer le TP",
+	"isComplete": false
+}
+
+###
+
+### Modifier un todo (admin uniquement)
+PUT {{TodoApi_HostAddress}}/api/todos/{{todoId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+	"name": "Terminer le TP et relire",
+	"isComplete": true
+}
+
+###
+
+### Supprimer un todo (admin uniquement)
+DELETE {{TodoApi_HostAddress}}/api/todos/{{todoId}}
+Authorization: Bearer {{token}}

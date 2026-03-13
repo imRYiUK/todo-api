@@ -1,0 +1,15 @@
+Nom du projet: Todo API ASP.NET Core + MongoDB + JWT
+Date: 2026-03-13
+
+Lien du repository GitHub public:
+- A REMPLIR: https://github.com/<votre-compte>/<votre-repo>
+
+Contenu du dépôt:
+- Code source complet
+- Dockerfile
+- docker-compose.yml
+- README.md avec étapes d'exécution
+
+Validation sécurité:
+- Admin uniquement: ajout/modification/suppression des todos
+- Utilisateurs authentifiés: lecture des todos

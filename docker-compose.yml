@@ -1,0 +1,31 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: todoapi-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  todoapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: todoapi-app
+    restart: unless-stopped
+    ports:
+      - "5013:5013"
+    environment:
+      - TodoDatabase__ConnectionString=mongodb://mongo:27017
+      - TodoDatabase__DatabaseName=TodoDb
+      - TodoDatabase__TodoCollectionName=Todos
+      - TodoDatabase__UserCollectionName=Users
+      - Jwt__Issuer=TodoApi
+      - Jwt__Audience=TodoApiClient
+      - Jwt__Key=CHANGE_THIS_IN_PRODUCTION_USE_AT_LEAST_32_CHARS
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
